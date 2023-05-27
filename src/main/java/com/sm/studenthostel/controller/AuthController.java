@@ -13,4 +13,14 @@ public class AuthController {
     return "auth/login";
   }
 
+  @GetMapping("/reset/request")
+  public String resetPasswordRequestView() {
+    return "auth/reset-password-request";
+  }
+
+  @GetMapping("/reset")
+  public String resetPasswordView() {
+    return "auth/reset-password";
+  }
+
 }

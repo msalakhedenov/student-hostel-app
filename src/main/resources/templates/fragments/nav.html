@@ -1,0 +1,23 @@
+<nav th:fragment="nav" class="navbar navbar-expand-sm navbar-light bg-white"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <div class="container-fluid px-md-5">
+        <a class="navbar-brand ms-lg-5 me-auto" href="#">
+            <img style="width: 50px" class="d-inline-block align-content-center me-3" th:src="@{/img/logo.png}" alt="logo">
+            Student Hostel
+        </a>
+        <div class="d-flex align-items-center me-lg-5">
+            <a href="#" class="btn btn-outline-primary d-flex align-items-center">
+                <i class="bi-person-circle me-2"></i>
+                <span sec:authentication="principal.user.lastNameAndFirstName"></span>
+            </a>
+            <form class="ms-3" th:action="@{/logout}" method="post">
+                <button class="btn btn-outline-danger d-flex align-items-center" type="submit">
+                    <i class="bi-box-arrow-left me-2"></i>
+                    Logout
+                </button>
+            </form>
+        </div>
+    </div>
+</nav>
