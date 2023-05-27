@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:replace="fragments/head.html :: head"></div>
+<body>
+<div th:replace="fragments/nav.html"></div>
+<div class="container">
+
+    <div th:replace="admin/nav.html :: nav ('students')"></div>
+
+    <div class="row mb-5">
+        <div class="col bg-white rounded-3 p-5">
+
+            <ol class="breadcrumb mb-3">
+                <li class="breadcrumb-item"><a th:href="@{/admin/students}">Student registry</a></li>
+                <li class="breadcrumb-item active">List of residents</li>
+            </ol>
+
+            <div class="d-flex justify-content-between">
+                <h2>List of residents</h2>
+                <a href="#" class="btn btn-outline-success px-4">
+                    <i style="font-size: 0.9rem" class="bi bi-file-earmark-excel me-1"></i>
+                    Export as Excel
+                </a>
+            </div>
+
+            <hr class="my-4">
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Full Name</th>
+                        <th>Phone</th>
+                        <th>E-mail</th>
+                        <th>Gender</th>
+                        <th>Contract No.</th>
+                        <th>Check-in date</th>
+                        <th>Institute</th>
+                        <th>Room</th>
+                        <th>Block</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="student : ${students}">
+                        <td><a href="#">[(${student.lastNameAndFirstName})]</a></td>
+                        <td>[(${student.phone})]</td>
+                        <td>[(${student.email})]</td>
+                        <td>[(${student.gender})]</td>
+                        <td>[(${student.agreementNumber})]</td>
+                        <td>[(${#temporals.format(student.checkInDate, 'dd.MM.yyyy')})]</td>
+                        <td>[(${student.institute.name})]</td>
+                        <td>[(${student.room.section.number})][(${student.room.letter})]</td>
+                        <td>[(${student.room.section.block.letter})]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

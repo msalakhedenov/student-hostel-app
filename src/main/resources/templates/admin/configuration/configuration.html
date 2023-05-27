@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:replace="fragments/head.html :: head"></div>
+<body>
+<div th:replace="fragments/nav.html"></div>
+<div class="container">
+    <div th:replace="admin/nav.html :: nav ('configuration')"></div>
+    <div class="row mb-5">
+        <div class="col bg-white rounded-3 p-5 mb-5">
+            <h2>Hostel Configuration</h2>
+            <hr class="my-4">
+            <div class="card my-3">
+                <div class="card-body">
+                    <h5 class="card-title">Room type settings and pricing</h5>
+                    <p class="card-text">Here you can configure the types of rooms according to the parameters of the number of beds and the cost of living</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Follow</a>
+                </div>
+            </div>
+            <div class="card my-3">
+                <div class="card-body">
+                    <h5 class="card-title">Institutes of the university</h5>
+                    <p class="card-text">List of institutions where students study</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Follow</a>
+                </div>
+            </div>
+            <div class="card my-3">
+                <div class="card-body">
+                    <h5 class="card-title">Hostel structure</h5>
+                    <p class="card-text">Here you can configure the number of floors, blocks, sections and rooms in the hostel</p>
+                </div>
+                <div class="card-footer">
+                    <a th:href="@{/admin/configuration/structure}" class="btn btn-primary">Follow</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

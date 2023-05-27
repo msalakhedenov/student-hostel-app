@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:replace="fragments/head.html :: head"></div>
+<body>
+<div th:replace="fragments/nav.html"></div>
+<div class="container">
+    <div th:replace="admin/nav.html :: nav ('configuration')"></div>
+
+    <div class="row mb-5">
+        <div class="col bg-white rounded-3 p-5 mb-5">
+
+            <ol class="breadcrumb mb-3">
+                <li class="breadcrumb-item"><a th:href="@{/admin/configuration}">Configuration</a></li>
+                <li class="breadcrumb-item active">Structure</li>
+            </ol>
+
+            <h2>Hostel structure</h2>
+
+            <hr class="my-4">
+
+            <div class="card my-3">
+                <div class="card-body">
+                    <h5 class="card-title">Add floor</h5>
+                    <p class="card-text">Add hostel floors to the system</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-primary">Add</a>
+                </div>
+            </div>
+
+            <hr class="my-4">
+
+            <div th:if="${#lists.isEmpty(floors)}">
+                <i>The structure of the hostel is not defined in the system</i>
+            </div>
+
+            <div class="card my-4" th:each="floor : ${floors}">
+
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Floor #[(${floor.id})]</h5>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="accordion" th:attr="id=|accordionBlocksF${floor.id}|">
+
+                        <div class="accordion-item" th:each="block : ${floor.blocks}">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        th:attr="data-bs-target=|#infoBlock${block.id}|">
+                                    Block [(${block.letter})]
+                                </button>
+                            </h2>
+                            <div th:attr="id=|infoBlock${block.id}|" class="accordion-collapse collapse">
+                                <div class="accordion-body">
+                                    <div th:if="${#lists.isEmpty(block.sections)}" class="d-flex justify-content-between">
+                                        <i>Sections not defined in this block</i>
+                                        <a href="#"
+                                           class="btn btn-outline-primary">
+                                            <i class="bi bi-plus-circle me-1" style="font-size: 0.9rem"></i>
+                                            Add sections
+                                        </a>
+                                    </div>
+                                    <div th:unless="${#lists.isEmpty(block.sections)}" class="d-flex gap-2">
+                                        <a href="#"
+                                           class="btn btn-outline-primary"
+                                           th:each="section : ${block.sections}" th:text="${section.number}"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="card-footer d-flex flex-row-reverse">
+                    <div th:unless="${floor.blocks.size == maxBlocksCount}">
+                        <a href="#"
+                           class="btn btn-outline-primary">
+                            <i class="bi bi-plus-circle me-1" style="font-size: 0.9rem"></i>
+                            Add block
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
